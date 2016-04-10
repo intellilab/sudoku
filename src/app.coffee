@@ -23,12 +23,23 @@ class SudokuGame
     level.innerHTML = @levels.map (level, i) ->
       "<option value=#{i}>#{level}</option>"
     .join ''
-    level.value = 0
+    level.value = do ->
+      data = location.hash.slice 1
+        .split '&'
+        .reduce (map, piece) ->
+          parts = piece.split '='
+          map[decodeURIComponent parts[0]] = decodeURIComponent parts[1]
+          map
+        , {}
+      +data.level || 0
     do @bindEvents
     do @onRestart
 
   bindEvents: ->
-    @els.level.addEventListener 'change', @onRestart, false
+    @els.level.addEventListener 'change', (e) =>
+      location.hash = "\#level=#{e.target.value}"
+      do @onRestart
+    , false
     @els.restart.addEventListener 'click', @onRestart, false
     @els.game.addEventListener 'click', @onGameClick, false
     @els.ctrl.addEventListener 'click', @onCtrlClick, false

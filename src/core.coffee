@@ -1,3 +1,5 @@
+TOTAL = 81
+
 class Sudoku
   # 每个小九宫格的第一个格子的位置
   squareMajor: [
@@ -24,7 +26,7 @@ class Sudoku
     # 随机填11个数，然后求解，据说有解率99.7%
     @data = []
     while 1
-      available = [0 ... 81]
+      available = [0 ... TOTAL]
       result = []
       # 随机填入11个数，81个格子填11个数总能填出来的
       for i in [0 ... 11]
@@ -86,7 +88,7 @@ class Sudoku
   solve: (result) ->
     solved = false
     dfs = =>
-      items = [0 ... 81]
+      items = [0 ... TOTAL]
         .filter (i) -> not result[i]
         .map (i) ->
           index: i
@@ -154,7 +156,6 @@ class Sudoku
     level = @level
     leastGiven = @leastGiven[level]
     result = do result.slice
-    TOTAL = 81
     remained = TOTAL
     console.time "puzzle level-#{level}"
     uniqueAnswer = (i) =>
@@ -166,7 +167,7 @@ class Sudoku
       result[i] = ans
       unique
     next = (i) ->
-      switch level
+      switch +level
         when 2
           # 间隔
           (i + 2 + ~~ (Math.random() * 3)) % TOTAL
@@ -196,19 +197,5 @@ class Sudoku
       break if level >= 3 and i is seed
     @puzzle = result
     console.timeEnd "puzzle level-#{level}"
-
-  dump: (result = @data, empty = '.') ->
-    out = []
-    line = null
-    # 稀疏数组不能用forEach遍历
-    for i in [0 ... 81]
-      item = result[i] or empty
-      unless i % 9
-        line = []
-        out.push line
-      line.push item
-    out
-    .map (line) -> line.join ' '
-    .join '\n'
 
 module?.exports = Sudoku
