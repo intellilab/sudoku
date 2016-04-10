@@ -140,11 +140,11 @@ class SudokuGame
     check = (i) =>
       item = @data.items[i]
       return if item.locked
-      @invalid += 1 if item.valid is 2
+      @data.invalid += 1 if item.valid is 2
       candidates = @core.candidates @data.puzzle, i
       wrong = item.data.some (v) -> (candidates.indexOf v) < 0
       item.valid = if wrong then 0 else (item.data.length is 1) + 1
-      @invalid -= 1 if item.valid is 2
+      @data.invalid -= 1 if item.valid is 2
       el = @els.items[i]
       el.classList[if wrong then 'add' else 'remove'] 'wrong'
     col = i % 9
@@ -174,7 +174,7 @@ class SudokuGame
     @data.current = -1
     unless @data.invalid
       do @stopTimer
-      @msg.innerHTML = '恭喜您成功解出数独！'
+      @els.msg.innerHTML = '恭喜您成功解出数独！'
 
 document.addEventListener 'DOMContentLoaded', ->
   game = new SudokuGame($('.sudoku-wrap'))
