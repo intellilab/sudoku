@@ -62,7 +62,7 @@ class SudokuGame
       selected = if ~ item.data.indexOf i then 'selected' else ''
       html.push '<div>' if i % 3 == 1
       html.push "<span data-key=#{i} class=\"#{selected}\" unselectable=on>#{i}</span>"
-      html.push '</div>' if not (i % 3)
+      html.push '</div>' unless i % 3
     selected = if @data.multi then 'selected' else ''
     html.push "<span data-key=multi class=\"col2 #{selected}\" unselectable=on>多选</span>"
     html.push '<span data-key=0 unselectable=on>&times;</span>'
@@ -113,7 +113,7 @@ class SudokuGame
       current = @data.current
       item = @data.items[current]
       # clear
-      if not key
+      unless key
         item.data = []
         @data.multi = false
       else if @data.multi
@@ -134,7 +134,7 @@ class SudokuGame
       .join ''
       @data.puzzle[current] = if item.data.length is 1 then item.data[0] else 0
       @check current
-      do @ctrlClose if not @data.multi
+      do @ctrlClose unless @data.multi
 
   check: (i) ->
     check = (i) =>
@@ -172,7 +172,7 @@ class SudokuGame
     @els.ctrl.classList.add 'sudoku-hide'
     @els.items[i].classList.remove 'focus'
     @data.current = -1
-    if not @data.invalid
+    unless @data.invalid
       do @stopTimer
       @msg.innerHTML = '恭喜您成功解出数独！'
 
