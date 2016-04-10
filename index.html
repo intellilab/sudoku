@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <title>数独</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sudoku-wrap">
+    <label>
+      已用时间：<span class="sudoku-timer">0</span>s
+    </label>
+    <label>
+      级别：
+      <select class="sudoku-level"></select>
+    </label>
+    <button class="sudoku-restart">重新开始</button>
+    <div class="sudoku-msg"></div>
+    <div class="sudoku-main">
+      <div class="sudoku-game sudoku-panel"></div>
+      <div class="sudoku-ctrl sudoku-panel sudoku-hide"></div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
