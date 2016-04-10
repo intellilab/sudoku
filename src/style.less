@@ -1,0 +1,115 @@
+@box-font-size: 24px;
+@box-size: 36px;
+@border-width-major: 2px;
+@border-width-minor: 1px;
+@border-color: gray;
+@box-color-background: lightgray;
+@box-color-foreground: black;
+@box-user-color-background: white;
+@box-user-color-foreground: blue;
+@box-wrong-color-background: red;
+@box-wrong-color-foreground: lightgreen;
+@box-focus-color-background: yellow;
+@box-focus-color-foreground: blue;
+@box-panel-color-background: #dd8;
+@box-panel-color-foreground: blue;
+@box-selected-color-background: green;
+@box-selected-color-foreground: yellow;
+
+.sudoku {
+  &-main {
+    position: relative;
+    display: inline-block;
+  }
+  &-panel {
+    display: inline-block;
+    padding: @border-width-major;
+    background: @border-color;
+    div {
+      &:not(:last-child) {
+        margin-bottom: @border-width-minor;
+      }
+    }
+    span {
+      display: inline-block;
+      width: @box-size;
+      height: @box-size;
+      text-align: center;
+      margin: 0;
+      font-size: @box-font-size;
+      line-height: @box-size;
+      color: @box-color-foreground;
+      background: @box-color-background;
+      vertical-align: top;
+      cursor: default;
+      user-select: none;
+      &:not(:last-child) {
+        margin-right: @border-width-minor;
+      }
+      &.user {
+        cursor: pointer;
+  			background: @box-user-color-background;
+  			color: @box-user-color-foreground;
+      }
+      &.wrong {
+  			background: @box-wrong-color-background;
+  			color: @box-wrong-color-foreground;
+  		}
+  		&.doubt {
+  			font-size: @box-font-size/3.3;
+  			line-height: @box-size/3;
+  		}
+  		&.focus {
+  			background: @box-focus-color-background;
+  			color: @box-focus-color-foreground;
+  		}
+      &.col2 {
+        width: @box-size * 2 + @border-width-minor;
+      }
+    }
+  }
+  &-game {
+    > div {
+      &:nth-child(3),
+      &:nth-child(6) {
+        margin-bottom: @border-width-major;
+      }
+    }
+    span {
+      &:nth-child(3),
+      &:nth-child(6) {
+        margin-right: @border-width-major;
+      }
+    }
+  }
+  &-ctrl {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: @border-width-major;
+    white-space: nowrap;
+    span {
+      cursor: pointer;
+      background: @box-panel-color-background;
+      color: @box-panel-color-foreground;
+      &.selected {
+				background: @box-selected-color-background;
+				color: @box-selected-color-foreground;
+      }
+    }
+  }
+  &-timer {
+    color: dodgerblue;
+  }
+  &-wrap {
+    text-align: center;
+  }
+  &-msg {
+    margin: 1em 0;
+    color: green;
+    text-align: center;
+  }
+  &-hide {
+    display: none;
+  }
+}
